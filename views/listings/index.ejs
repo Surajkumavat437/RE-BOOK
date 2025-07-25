@@ -1,0 +1,26 @@
+<% layout("/layouts/boilerplate") %>
+
+    <body>
+        <h3 class="text-center my-4">All Listings of Books</h3>
+
+        <div class="container">
+            <div class="row">
+                <% for (let list of listingBooks) { %>
+                    <div class="col-md-3 mb-5 d-flex justify-content-center">
+                        <a href="/listing/<%= list._id %>" class="card-link-wrapper">
+                            <div class="card premium-hover" style="width: 15rem; height: 30rem;">
+                                <img src="<%= list.image %>" class="card-img-top"
+                                    style="height: 300px; object-fit: cover;" alt="Book image">
+                                <div class="card-body">
+                                    <p class="card-text"><strong>Title : <%= list.title %></strong></p>
+                                    <p class="card-text">
+                                        <%= list.description %>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <% } %>
+            </div>
+        </div>
+    </body>

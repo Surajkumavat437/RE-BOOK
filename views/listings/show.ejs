@@ -1,0 +1,73 @@
+<% layout("/layouts/boilerplate") %>
+
+    <body>
+        <h1 class="d-flex justify-content-center">Detailed Info About the Book</h1>
+        <div class="d-flex justify-content-center mt-5">
+            <div class="card outerline shadow-lg" style="width: 25rem;">
+                <img src="<%= showListing.image %>" class="card-img-top" alt="Book image">
+                <div class="card-body pt-5">
+                    <h5 class="card-title"> Book Name : <%= showListing.title %>
+                    </h5>
+                    <h6 class="card-title pt-2"><strong>Author :</strong>
+                        <%= showListing.author %>
+                    </h6>
+                    <h6 class="card-title pt-2"><strong>Created By :</strong>
+                        <%= showListing.uploader.username %>
+                    </h6>
+                    <p class="card-text pt-2"><strong>Description :</strong>
+                        <%= showListing.description %>
+                    </p>
+                    <p class="card-text pt-2"><strong>Condition :</strong>
+                        <%= showListing.condition %>
+                    </p>
+                    <p class="card-text pt-2"><strong>Contact:</strong>
+                        <%= showListing.uploader.email%>
+                    </p>
+                    <p class="card-text fs-3"><strong>Price :</strong> &#8377; <%=
+                            showListing.price.toLocaleString('en-IN') %>
+                    </p>
+                    <div class="mb-3">
+                        <% if (showListing.uploader && userId &&
+                            showListing.uploader._id.toString()===userId.toString()) { %>
+                            <div class="d-flex justify-content-center pt-4">
+                                <div>
+                                    <form action="/listing/<%= showListing._id %>/edit">
+                                        <button class="btn btn-warning">Update</button>
+                                    </form>
+                                </div>
+                                <div class="ms-4">
+                                    <form action="/listing/<%= showListing._id %>?_method=DELETE" method="POST">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <% } %>
+
+                    </div>
+
+                    <div class="d-flex row align-items-center">
+                        <% if (userId && showListing.uploader && showListing.uploader._id.toString()
+                            !==userId.toString()) { %>
+                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=<%= encodeURIComponent(showListing.uploader.email) %>&su=<%= encodeURIComponent('Request to Purchase Your Book: ' + showListing.title) %>&body=<%= encodeURIComponent(
+                      'Hello ' + (showListing.uploader.username || '') + ',\n\n' +
+                      'My name is ' + (currentUser ? currentUser.username : 'an interested buyer') + ', and I came across your book listing titled "' + showListing.title + '" on your platform.\n\n' +
+                      'I am very interested in purchasing this book. Could you please let me know if it is still available and provide any additional details regarding its condition, price, and pickup/delivery options?\n\n' +
+                      'Looking forward to your reply.\n\n' +
+                      'Thank you and best regards,\n' +
+                      (currentUser ? currentUser.username : '') + '\n' +
+                      (currentUser ? currentUser.email : '')
+                    ) %>" target="_blank" class="btn btn-success">
+                                Request This Book via Gmail
+                            </a>
+                            <% } else if (!userId) { %>
+                                <p><em><strong>Login to contact the seller.</strong></em></p>
+                                <% } %>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        </div>
+        </div>
+    </body>

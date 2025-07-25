@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+
+
+    <h1 class="text-center my-4">SignUp Form</h1>
+
+    <div class="container">
+        <div class="row justify-content-center needs-validation ">
+            <div class="col-md-5">
+                <% if (success && success.length> 0) { %>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <%= success[0] %>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <% } %>
+
+                        <% if (error && error.length> 0) { %>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <%= error[0] %>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                            </div>
+                            <% } %>
+                                <div class="card shadow-lg p-4 transparent">
+                                    <form action="/home/signup" method="POST" class="needs-validation" novalidate>
+                                        <div class="mb-3">
+                                            <label for="username" class="form-label">UserName :</label>
+                                            <input type="text" class="form-control" id="username" name="username"
+                                                placeholder="Enter UserName" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">E-Mail :</label>
+                                            <input type="email" class="form-control" id="email" name="email"
+                                                placeholder="Enter E-Mail" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="college" class="form-label">college-Name :</label>
+                                            <input type="text" class="form-control" id="college" name="college"
+                                                placeholder="Enter college-Name" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="password" class="form-label">Password:</label>
+                                            <input type="text" class="form-control" id="author" name="password"
+                                                placeholder="Enter Password" required>
+                                        </div>
+
+
+
+                                        <div class="text-center mt-4">
+                                            <button type="submit" class="btn btn-primary px-4">SignUp</button>
+                                        </div>
+                                    </form>
+                                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
+    <script src="/js/formValidation.js"></script>
+</body>
+
+</html>

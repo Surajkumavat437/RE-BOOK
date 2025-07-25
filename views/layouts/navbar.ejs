@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top shadow-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/listing"><i class="fa-solid fa-book-open-reader "></i></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 fw-semibold">
+                <li class="nav-item ">
+                    <a class="nav-link active" aria-current="page" href="/listing">RE-Book</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/listing/new">Upload Book</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/listing/info">Contact</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/listing/info">About</a>
+                </li>
+
+                <li class="nav-item">
+                    <% if (session.userId) { %>
+                        <a class="nav-link" href="/home/logout">Logout</a>
+                        <% } else { %>
+                            <a class="nav-link" href="/home/login">Login</a>
+                            <% } %>
+                </li>
+
+            </ul>
+            <form class="d-flex" role="search" action="/listing/search" method="GET">
+                <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search" />
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>

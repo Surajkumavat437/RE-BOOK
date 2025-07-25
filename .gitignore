@@ -1,0 +1,11 @@
+# Ignore node_modules folder and its contents
+node_modules/
+
+# Ignore uploads folder and its contents
+uploads/
+
+# Ignore environment file
+.env
+
+# Ignore all log files
+*.log

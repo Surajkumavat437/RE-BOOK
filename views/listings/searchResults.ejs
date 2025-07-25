@@ -1,0 +1,31 @@
+<% layout("/layouts/boilerplate") %>
+    <div class="container">
+        <div class="d-flex flex-column align-items-center">
+            <h2>Results for "<%= query %>"</h2>
+        </div>
+
+    </div>
+
+    <% if (listings.length===0) { %>
+        <p>No listings found.</p>
+        <% } else { %>
+            <div class="container">
+                <div class="d-flex flex-column align-items-center">
+                    <% listings.forEach(listing=> { %>
+                        <div class="col-md-3 mb-3">
+                            <div class="card p-3 shadow-sm  "
+                                style="background: linear-gradient(100deg, #f7e0cd,     #b68859); ">
+                                <h5>
+                                    <%= listing.title %>
+                                </h5>
+                                <p>
+                                    <%= listing.description %>
+                                </p>
+                                <p><strong>₹<%= listing.price %></strong></p>
+                                <a href="/listing/<%= listing._id %>" class="btn btn-sm btn-light">View</a>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+            </div>
+            <% } %>

@@ -1,0 +1,59 @@
+<% layout("/layouts/boilerplate") %>
+
+    <body>
+        <h1 class="text-center my-4">Creating New Form</h1>
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card shadow-lg p-4 transparent">
+                        <form action="/listing/new" method="POST" class="needs-validation" enctype="multipart/form-data"
+                            novalidate>
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Title:</label>
+                                <input type="text" class="form-control" id="title" name="title"
+                                    placeholder="Enter Book Name" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="author" class="form-label">Author:</label>
+                                <input type="text" class="form-control" id="author" name="author"
+                                    placeholder="Enter Author Name" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="condition" class="form-label">Condition of the Book:</label>
+                                <select name="condition" id="condition" class="form-select" required>
+                                    <option value="New">New</option>
+                                    <option value="Good">Good</option>
+                                    <option value="Old">Old</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="price" class="form-label">Price:</label>
+                                <input type="number" class="form-control" id="price" name="price"
+                                    placeholder="Enter Price" required min="0">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Description:</label>
+                                <input type="text" class="form-control" id="description" name="description"
+                                    placeholder="Describe the Book" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="image" class="form-label">Upload Image:</label>
+                                <input type="file" class="form-control" id="image" name="image"
+                                    placeholder="Enter Image URL" required>
+                            </div>
+
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn btn-success px-4 bg-success text-white">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
