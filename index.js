@@ -9,16 +9,10 @@ const flash = require("connect-flash");
 const morgan = require("morgan");
 const ejsMate = require("ejs-mate");
 
-// Import routes
 const homeRoutes = require("./routes/homeRoutes");
 const authRoutes = require("./routes/authRoutes");
 const bookRoutes = require("./routes/bookRoutes");
-
-// Connect to DB
-mongoose
-  .connect(process.env.DB_URL)
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.log(err));
+const PORT = process.env.PORT || 8080;
 
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public")));
@@ -29,7 +23,6 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.engine("ejs", ejsMate);
 
-// Session and flash
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -40,7 +33,6 @@ app.use(
 );
 app.use(flash());
 
-// Flash & session middleware for templates
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
@@ -48,25 +40,34 @@ app.use((req, res, next) => {
   next();
 });
 
-// Mount routes
 app.use("/", homeRoutes);
 app.use("/home", authRoutes);
 app.use("/listing", bookRoutes);
 
-// 404 handler
 app.use((req, res, next) => {
   res
     .status(404)
     .render("listings/error", { message: "Page Not Found", statusCode: 404 });
 });
 
-// Global error handler
 app.use((err, req, res, next) => {
   console.error(err);
   const { statusCode = 500, message = "Something went wrong" } = err;
   res.status(statusCode).render("listings/error", { message, statusCode });
 });
 
-app.listen(8080, () => {
-  console.log("Server listening on port 8080");
-});
+async function startServer() {
+  try {
+    await mongoose.connect(process.env.DB_URL);
+    console.log("MongoDB connected");
+
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  } catch (err) {
+    console.error("MongoDB connection error:", err);
+    process.exit(1);
+  }
+}
+
+startServer();
